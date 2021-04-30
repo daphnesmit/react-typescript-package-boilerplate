@@ -1,0 +1,123 @@
+{
+  "name": "react-typescript-package-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate for scaffolding a React Typescript Package with Eslint, Jest & React Testing Library",
+  "author": "Daphne Smit",
+  "license": "ISC",
+  "contributors": [
+    "Daphne Smit <daphnesmit1986@gmail.com>"
+  ],
+  "repository": "git://github.com/daphnesmit/react-typescript-package-boilerplate.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "sideEffects": false,
+  "types": "dist/types/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "source": "src/index.ts",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist"
+  ],
+  "lint-staged": {
+    "**/*.(js|ts|tsx)": [
+      "eslint --fix"
+    ]
+  },
+  "release": {
+    "branches": [
+      "master",
+      {
+        "name": "develop",
+        "prerelease": true
+      },
+      {
+        "name": "release",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator"
+    ]
+  },
+  "scripts": {
+    "build": "rimraf dist; npm run build:rollup && npm run build:types",
+    "build:types": "ttsc --project ./tsconfig.json -d --emitDeclarationOnly --noEmit false --outDir dist/types --declarationDir dist/types",
+    "build:rollup": "rollup -c",
+    "build:analyze-speed": "npm run build | gnomon",
+    "start": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --no-cache",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "lint-fix": "eslint --fix src --ext .ts,.tsx,.js,.jsx",
+    "type-check": "tsc --noEmit",
+    "storybook": "start-storybook -p 6006"
+  },
+  "peerDependencies": {
+    "react": ">=16",
+    "react-dom": ">=16",
+    "styled-components": "~5.2.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.15",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.0",
+    "@rollup/plugin-typescript": "^8.2.0",
+    "@rollup/plugin-url": "^6.0.0",
+    "@storybook/addon-a11y": "^6.2.8",
+    "@storybook/addon-actions": "^6.2.8",
+    "@storybook/addon-essentials": "^6.2.8",
+    "@storybook/addon-links": "^6.2.8",
+    "@storybook/react": "^6.2.8",
+    "@storybook/theming": "^6.2.8",
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
+    "@types/jest": "^26.0.22",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@types/styled-components": "^5.1.9",
+    "@typescript-eslint/eslint-plugin": "^4.19.0",
+    "@typescript-eslint/parser": "^4.19.0",
+    "babel-loader": "^8.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.24.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.23.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-standard": "^4.1.0",
+    "gnomon": "^1.5.0",
+    "husky": "^6.0.0",
+    "jest": "^26.6.3",
+    "jest-circus": "^26.6.3",
+    "jest-styled-components": "^7.0.3",
+    "react": "^17.0.2",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "react-dom": "^17.0.2",
+    "rollup": "^2.45.2",
+    "rollup-plugin-node-externals": "^2.2.0",
+    "styled-components": "^5.2.3",
+    "styled-tools": "^1.7.2",
+    "ts-jest": "^26.5.5",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "ttypescript": "^1.5.12",
+    "typescript": "^4.2.4",
+    "typescript-transform-paths": "^2.2.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+name: Build, Lint & Test
+on: [ push ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Cache NPM downloads
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-npm
+      - name: Cache node modules
+        uses: actions/cache@v1
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12.x
+      - name: NPM install
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: npm ci
+      - name: NPM build
+        run: npm run build
+      - name: NPM build storybook
+        run: npm run build-storybook
+      - name: Archive build artifacts
+        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
+        uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: dist
+      - name: Archive build artifacts
+        if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
+        uses: actions/upload-artifact@v1
+        with:
+          name: storybook
+          path: storybook-static
+  test:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - uses: actions/checkout@v1
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12.x
+      - name: NPM lint
+        run: npm run lint
+      - name: NPM test
+        run: npm test
