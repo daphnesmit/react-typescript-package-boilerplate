@@ -13,7 +13,7 @@ jobs:
           key: ${{ runner.os }}-node-npm-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-npm
-      - name: Cache node modules
+      - name: Cache node_modules
         uses: actions/cache@v1
         id: cache
         with:
@@ -29,13 +29,13 @@ jobs:
         run: npm run build
       - name: NPM build storybook
         run: npm run build-storybook
-      - name: Archive build artifacts
+      - name: Archive app build
         if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
         uses: actions/upload-artifact@v1
         with:
           name: dist
           path: dist
-      - name: Archive build artifacts
+      - name: Archive storybook build
         if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/release'
         uses: actions/upload-artifact@v1
         with:
@@ -46,7 +46,7 @@ jobs:
     needs: [ build ]
     steps:
       - uses: actions/checkout@v1
-      - name: Cache node modules
+      - name: Cache node_modules
         uses: actions/cache@v1
         with:
           path: node_modules
