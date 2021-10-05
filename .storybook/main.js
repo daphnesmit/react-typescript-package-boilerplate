@@ -11,6 +11,9 @@ module.exports = {
     "@storybook/addon-essentials",
     '@storybook/addon-a11y',
   ],
+  core: {
+    builder: "webpack5",
+  },
   typescript: {
     check: false,
     checkOptions: {},
