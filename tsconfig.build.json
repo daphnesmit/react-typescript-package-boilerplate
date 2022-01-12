@@ -3,12 +3,16 @@
     "target": "es5",
     "lib": [
       "dom",
-      "es2019",
+      "es2019"
     ],
     "typeRoots": [
       "node_modules/@types",
       "src/types/**"
     ],
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/types",
     "rootDir": "src",
     "sourceMap": true,
     "allowJs": false,
@@ -22,12 +26,19 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "noEmit": true,
     "jsx": "react",
     "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src",
-    "config"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/tests/**",
+    "src/mail/**",
+    "src/storybook-utils/*",
+    "src/**/*.test.tsx",
+    "src/**/*.test.ts",
+    "src/**/*.stories.tsx"
   ]
 }

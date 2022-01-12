@@ -1,5 +1,4 @@
 const path = require('path');
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   "stories": [
@@ -31,13 +30,6 @@ module.exports = {
     //   exclude: /node_modules/,
     //   loader: 'graphql-tag/loader'
     // })
-
-    // Make sure storybook handles aliases like import 'components/Button'
-    config.resolve.plugins = [
-      new TsconfigPathsPlugin({
-        configFile: path.resolve(__dirname, '../tsconfig.json')
-      }),
-    ];
 
     // Return the altered config
     return config;

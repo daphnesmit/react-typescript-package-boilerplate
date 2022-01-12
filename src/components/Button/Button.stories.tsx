@@ -7,14 +7,22 @@ export default {
   title: 'Example/Button',
   component: Button,
   argTypes: {
-    label: { control: 'text' },
-    backgroundColor: { control: 'color' },
     variant: {
-      variant: ['primary', 'secondary'],
+      name: 'variant',
+      options: ['primary', 'secondary'],
+      defaultValue: 'primary',
     },
     size: {
-      variant: ['large', 'medium', 'small'],
+      name: 'size',
+      options: ['large', 'medium', 'small'],
+      defaultValue: 'medium',
     },
+    type: {
+      name: 'type',
+      options: ['button', 'submit'],
+      defaultValue: 'button',
+    },
+    backgroundColor: { control: 'color' },
   },
 } as Meta;
 

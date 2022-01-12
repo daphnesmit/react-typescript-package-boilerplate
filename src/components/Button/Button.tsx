@@ -40,8 +40,8 @@ const StyledButton = styled.button<Omit<ButtonProps, 'label'>>`
 
   ${switchProp('variant', {
     primary: css`
-        color: white;
-        background-color: #1ea7fd;
+      color: white;
+      background-color: #1ea7fd;
     `,
     secondary: css`
       color: #333;
@@ -56,12 +56,12 @@ const StyledButton = styled.button<Omit<ButtonProps, 'label'>>`
       padding: 10px 16px;
     `,
     medium: css`
-        font-size: 14px;
-        padding: 11px 20px;
+      font-size: 14px;
+      padding: 11px 20px;
     `,
     large: css`
-        font-size: 16px;
-        padding: 12px 24px;
+      font-size: 16px;
+      padding: 12px 24px;
     `,
   })}
 `;
